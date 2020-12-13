@@ -12,14 +12,15 @@ var win;
 var fname = 'default';
 
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, '/static')));
+app.use('views', path.join(__dirname, '/views'));
 
-if (fs.existsSync(path.join(__dirname, 'upload'))) {
-    fs.rmdirSync(path.join(__dirname, 'upload'), {force: true});
+if (fs.existsSync(path.join(__dirname, '/upload'))) {
+    fs.rmdirSync(path.join(__dirname, '/upload'), {force: true});
 }
-fs.mkdirSync(path.join(__dirname, 'upload'));
+fs.mkdirSync(path.join(__dirname, '/upload'));
 
-if (fs.existsSync(path.join(__dirname, 'views/custom.ejs'))) {
+if (fs.existsSync(path.join(__dirname, '/views/custom.ejs'))) {
     fname = 'custom';
 }
 
