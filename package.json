@@ -1,0 +1,20 @@
+{
+  "name": "quicksign",
+  "version": "0.0.1",
+  "description": "Quick Signage Tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Faheem Quazi",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^11.1.0"
+  },
+  "dependencies": {
+    "electron-app-settings": "^1.0.2",
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
+  }
+}
