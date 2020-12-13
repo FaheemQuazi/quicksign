@@ -13,7 +13,7 @@ var fname = 'default';
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/static')));
-app.use('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, '/views'));
 
 if (fs.existsSync(path.join(__dirname, '/upload'))) {
     fs.rmdirSync(path.join(__dirname, '/upload'), {force: true});
