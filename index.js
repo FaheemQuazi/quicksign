@@ -6,7 +6,7 @@ const multer = require('multer');
 const app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var upload = multer({dest: 'upload/'});
+var upload = multer({dest: path.join(__dirname, 'upload/')});
 
 var win;
 var fname = 'default';
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, '/static')));
 app.set('views', path.join(__dirname, '/views'));
 
 if (fs.existsSync(path.join(__dirname, '/upload'))) {
-    fs.rmdirSync(path.join(__dirname, '/upload'), {force: true});
+    fs.rmdirSync(path.join(__dirname, '/upload'), {recursive: true, force: true});
 }
 fs.mkdirSync(path.join(__dirname, '/upload'));
 
@@ -35,7 +35,7 @@ app.get('/edit', (req, res) => {
 });
 
 app.post('/up', upload.single('newsite'), (req, res, next) => {
-    fs.renameSync(req.file.path, 'views\\custom.ejs');
+    fs.renameSync(req.file.path, path.join(__dirname, '/views/custom.ejs'));
     fname = "custom";
     io.emit('ref');
     res.redirect('/edit');
