@@ -1,4 +1,5 @@
 const express = require('express');
+const basicAuth = require('express-basic-auth');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -8,7 +9,6 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var upload = multer({dest: path.join(__dirname, 'upload/')});
 
-var win;
 var fname = 'default';
 
 app.set('view engine', 'ejs');
@@ -30,8 +30,15 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use(basicAuth({
+    users: {
+        'admin': 'test' // You should probably change this lol
+    },
+    challenge: true
+}));
+
 app.get('/edit', (req, res) => {
-    res.send('<form action="/up" method="post" enctype="multipart/form-data"><input type="file" name="newsite" /><input type="submit" value="Update" name="sub"/></form>');
+    res.render('edit');
 });
 
 app.post('/up', upload.single('newsite'), (req, res, next) => {
